@@ -1,12 +1,12 @@
-# MyAirplaneFork
+# Anaplane
 
-A template project for forking Airplane!
+An Airplane fork for anarchy servers.
 
 ## Initial Setup
 
 Fork this repository to your own repo, then clone it locally. Once you've cloned it, you can setup the patches:
 ```bash
-cd MyAirplaneFork
+cd Anaplane
 ./gradlew applyPatches
 # or on windows
 gradlew.bat applyPatches
@@ -16,22 +16,22 @@ This will set up the entire project, as once it's done everything will be ready 
 
 ## Working on the fork
 
-Once it applies the patches, you'll have two directories: `MyAirplaneFork-API`, and `MyAirplaneFork-Server`.
-Inside the `MyAirplaneFork-API` you should be somewhat familiar seeing the Bukkit library.
+Once it applies the patches, you'll have two directories: `Anaplane-API`, and `Anaplane-Server`.
+Inside the `Anaplane-API` you should be somewhat familiar seeing the Bukkit library.
 Any interfaces to the server you want to expose to plugins, should go in this project.
 
-Inside of `MyAirplaneFork-Server`, you'll find the actual implementation of the API.
+Inside of `Anaplane-Server`, you'll find the actual implementation of the API.
 Here is where you can make logic changes to the server, with the power to change anything in the implementation that you want!
 
 ## What is a patch file?
 
 In order to not distribute any of Mojang's assets, a `.patch` file is basically the exact same thing as a Git commit.
 It represents a change to the server, and applies on top of previous changes, which includes Mojang's original Minecraft server code.
-(and CraftBukkit, and Spigot, and Paper, and Tuinity, and Airplane..)
+(and CraftBukkit, and Spigot, and Paper, and Tuinity, and Airplane, and Anaplane..)
 
 Each patch represents 1 commit inside the respective project. 
-`patches/api` adds commits to `MyAirplaneFork-API`, while `patches/server` adds commits to `MyAirplaneFork-Server`.
-Both of `MyAirplaneFork-API` and `MyAirplaneFork-Server` have their own git repository inside them, however there's no remote (like GitHub) that you push these repositories to.
+`patches/api` adds commits to `Anaplane-API`, while `patches/server` adds commits to `Anaplane-Server`.
+Both of `Anaplane-API` and `Anaplane-Server` have their own git repository inside them, however there's no remote (like GitHub) that you push these repositories to.
 Instead, they get built from all the patches you have in your `patches` folder.
 
 So if you want to create a new patch, just add a commit to either the API or Server folder, and all you need to do to generate the patch is:
@@ -110,7 +110,7 @@ If you're just building the fork to test, you can run:
 gradlew.bat build
 ```
 
-Which will output your final JAR at `MyAirplaneFork-Server/build/libs/myairplanefork-server-1.16.5-R0.1-SNAPSHOT.jar`.
+Which will output your final JAR at `Anaplane-Server/build/libs/anaplane-server-1.16.5-R0.1-SNAPSHOT.jar`.
 However, you should not distribute this JAR outside testing because it contains Mojang's copyrighted Minecraft code.
 Instead, you can use the following command to generate a JAR that downloads Mojang's server when it's ran, and applies your changes on top:
 
@@ -120,7 +120,7 @@ Instead, you can use the following command to generate a JAR that downloads Moja
 gradle.bat paperclip
 ```
 
-This will output your distributable JAR at `launcher-myairplanefork.jar`, right in your main directory!
+This will output your distributable JAR at `launcher-anaplane.jar`, right in your main directory!
 
 ## Questions?
 
@@ -142,7 +142,7 @@ This won't be a comprehensive guide, but if you need to change branding you shou
 
 - build.gradle.kts (forkName, groupId, forkUrl, paperclipName)
 - settings.gradle.kts (forkName)
-- MyAirplaneFork-Server/pom.xml (API dependency)
+- Anaplane-Server/pom.xml (API dependency)
 - PaperVersionFinder.java (change GitHub repo)
 - MinecraftServer.java (getServerModName)
 - CraftServer.java (serverName)
