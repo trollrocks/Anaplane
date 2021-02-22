@@ -1,0 +1,75 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Lewis Crichton <lewistehminerz@outlook.com>
+Date: Mon, 22 Feb 2021 18:59:52 +0000
+Subject: [PATCH] Anaplane Branding
+
+
+diff --git a/pom.xml b/pom.xml
+index 37b92213fb878d8429e6dd049fe9a151cf945618..0b38553e2b5f4e205eb56130295eec28d4b43213 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -27,8 +27,8 @@
+ 
+     <dependencies>
+         <dependency>
+-            <groupId>com.mygroupid</groupId>
+-            <artifactId>myairplanefork-api</artifactId>
++            <groupId>troll.anaplane</groupId>
++            <artifactId>anaplane-api</artifactId>
+             <version>${project.version}</version>
+             <scope>compile</scope>
+         </dependency>
+diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
+index e9087874f52b1761b48c0e7557e187e9b3249b2e..dcbcee94be113ff3139c0075197193d069a3aee0 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
++++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
+@@ -24,8 +24,8 @@ public class PaperVersionFetcher implements VersionFetcher {
+     @Nonnull
+     @Override
+     public String getVersionMessage(@Nonnull String serverVersion) {
+-        String[] parts = serverVersion.substring("git-MyAirplaneFork-".length()).split("[-\\s]"); // MyAirplaneFork // Airplane // Tuinity
+-        String updateMessage = getUpdateStatusMessage("MyGithubName/MyAirplaneFork", GITHUB_BRANCH_NAME, parts[0]); // MyAirplaneFork // Airplane // Tuinity
++        String[] parts = serverVersion.substring("git-Anaplane-".length()).split("[-\\s]"); // Anaplane // Airplane // Tuinity
++        String updateMessage = getUpdateStatusMessage("TrollRocks/Anaplane", GITHUB_BRANCH_NAME, parts[0]); // Anaplane // Airplane // Tuinity
+         String history = getHistory();
+ 
+         return history != null ? history + "\n" + updateMessage : updateMessage;
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 3b0359a71673071a0aa00052bf122a8e4e94b87d..7183e47e02bde53f6d81771ecbc44c0719fcf74c 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -1513,7 +1513,7 @@ public abstract class MinecraftServer extends IAsyncTaskHandlerReentrant<TickTas
+     }
+ 
+     public String getServerModName() {
+-        return "MyAirplaneFork"; // MyAirplaneFork // Airplane // Tuinity //Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
++        return "Anaplane"; // Anaplane // Airplane // Tuinity //Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
+     }
+ 
+     public CrashReport b(CrashReport crashreport) {
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 3c0558de9e103fe6eb09f5685bb8367d3c2a6a40..1b1c359927159ef968daabd695c4b3bff070c1e9 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -231,7 +231,7 @@ import javax.annotation.Nullable; // Paper
+ import javax.annotation.Nonnull; // Paper
+ 
+ public final class CraftServer implements Server {
+-    private final String serverName = "MyAirplaneFork"; // Paper // Tuinity // Airplane // MyAirplaneFork
++    private final String serverName = "Anaplane"; // Paper // Tuinity // Airplane // Anaplane
+     private final String serverVersion;
+     private final String bukkitVersion = Versioning.getBukkitVersion();
+     private final Logger logger = Logger.getLogger("Minecraft");
+diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
+index 99ce1c691407a8220bc1cbbcda42b65863106d59..0033ddae70ba39ffa629bedd443affffc049890a 100644
+--- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
++++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
+@@ -11,7 +11,7 @@ public final class Versioning {
+     public static String getBukkitVersion() {
+         String result = "Unknown-Version";
+ 
+-        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/com.mygroupid/myairplanefork-api/pom.properties"); // Tuinity // Airplane // MyAirplaneFork
++        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/troll.anaplane/anaplane-api/pom.properties"); // Tuinity // Airplane // Anaplane
+         Properties properties = new Properties();
+ 
+         if (stream != null) {

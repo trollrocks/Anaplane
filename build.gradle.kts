@@ -7,12 +7,12 @@ plugins {
 }
 
 toothpick {
-    forkName = "MyAirplaneFork"
-    groupId = "com.mygroupid"
+    forkName = "Anaplane"
+    groupId = "troll.anaplane"
     val versionTag = System.getenv("BUILD_NUMBER")
         ?: "\"${gitCmd("rev-parse", "--short", "HEAD").output}\""
     forkVersion = "git-$forkName-$versionTag"
-    forkUrl = "https://github.com/MyName/MyAirplaneFork"
+    forkUrl = "https://github.com/TrollRocks/Anaplane"
 
     minecraftVersion = "1.16.5"
     nmsPackage = "1_16_R3"
@@ -21,7 +21,7 @@ toothpick {
     upstream = "Airplane"
     upstreamBranch = "origin/master"
 
-    paperclipName = "launcher-myairplanefork"
+    paperclipName = "launcher-anaplane"
 
     server {
         project = project(":$forkNameLowercase-server")
