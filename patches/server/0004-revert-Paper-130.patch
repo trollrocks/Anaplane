@@ -1,0 +1,32 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Lewis Crichton <lewistehminerz@outlook.com>
+Date: Mon, 22 Feb 2021 20:01:52 +0000
+Subject: [PATCH] revert Paper 130
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityPlayer.java b/src/main/java/net/minecraft/server/EntityPlayer.java
+index 173a210392d71cdfc551f095dc0d9c9040d22d3f..ff14750ba5725c8c8a412731a5e91462d924440d 100644
+--- a/src/main/java/net/minecraft/server/EntityPlayer.java
++++ b/src/main/java/net/minecraft/server/EntityPlayer.java
+@@ -2299,7 +2299,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
+ 
+     @Override
+     public boolean isFrozen() { // Paper - protected > public
+-        return super.isFrozen() || (this.playerConnection != null && this.playerConnection.isDisconnected()); // Paper
++        return super.isFrozen() || !getBukkitEntity().isOnline(); // Anaplane - reverting Paper patch 130
+     }
+ 
+     @Override
+diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index 4058c1f7ada7d0c9e4ba73a0073b4f94bf410a8f..f9ee6d98acc88264f92f0645b8213d363b3466c4 100644
+--- a/src/main/java/net/minecraft/server/PlayerConnection.java
++++ b/src/main/java/net/minecraft/server/PlayerConnection.java
+@@ -2968,7 +2968,7 @@ public class PlayerConnection implements PacketListenerPlayIn {
+     // Paper end
+ 
+     public final boolean isDisconnected() {
+-        return (!this.player.joining && !this.networkManager.isConnected()) || this.processedDisconnect; // Paper
++        return !this.player.joining && !this.networkManager.isConnected(); // Anaplane - reverting Paper patch 130
+     }
+     // CraftBukkit end
+ 

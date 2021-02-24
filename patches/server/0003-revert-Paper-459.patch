@@ -1,0 +1,113 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Lewis Crichton <lewistehminerz@outlook.com>
+Date: Mon, 22 Feb 2021 19:20:59 +0000
+Subject: [PATCH] revert Paper 459 This patch was responsible for fixing most
+ dupe glitches via cloning an itemstack and destroying the source itemstack
+ when the cloned itemstack was dropped. This permits itemstacks to exist
+ twice.
+
+
+diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
+index e16ba05cf64b2c8ae3e38e89c9d869ecb5d23552..7051f277148b390c061bf7feef28c08a1739aecc 100644
+--- a/src/main/java/net/minecraft/server/Entity.java
++++ b/src/main/java/net/minecraft/server/Entity.java
+@@ -2148,12 +2148,11 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+         } else {
+             // CraftBukkit start - Capture drops for death event
+             if (this instanceof EntityLiving && !((EntityLiving) this).forceDrops) {
+-                ((EntityLiving) this).drops.add(org.bukkit.craftbukkit.inventory.CraftItemStack.asCraftMirror(itemstack)); // Paper - mirror so we can destroy it later
++                ((EntityLiving) this).drops.add(org.bukkit.craftbukkit.inventory.CraftItemStack.asBukkitCopy(itemstack)); // Anaplane - reverting Paper patch 459
+                 return null;
+             }
+             // CraftBukkit end
+-            EntityItem entityitem = new EntityItem(this.world, this.locX(), this.locY() + (double) f, this.locZ(), itemstack.cloneItemStack()); // Paper - clone so we can destroy original
+-            itemstack.setCount(0); // Paper - destroy this item - if this ever leaks due to game bugs, ensure it doesn't dupe
++            EntityItem entityitem = new EntityItem(this.world, this.locX(), this.locY() + (double) f, this.locZ(), itemstack); // Anaplane - reverting Paper patch 459
+ 
+             entityitem.defaultPickupDelay();
+             // CraftBukkit start
+@@ -2803,12 +2802,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+     @Nullable
+     public Entity teleportTo(WorldServer worldserver, BlockPosition location) {
+         // CraftBukkit end
+-        // Paper start - fix bad state entities causing dupes
+-        if (!isAlive() || !valid) {
+-            LOGGER.warn("Illegal Entity Teleport " + this + " to " + worldserver + ":" + location, new Throwable());
+-            return null;
+-        }
+-        // Paper end
++        // Anaplane - reverting Paper patch 459
+         if (this.world instanceof WorldServer && !this.dead) {
+             this.world.getMethodProfiler().enter("changeDimension");
+             // CraftBukkit start
+@@ -2829,11 +2823,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+                 // CraftBukkit end
+ 
+                 this.world.getMethodProfiler().exitEnter("reloading");
+-                // Paper start - Change lead drop timing to prevent dupe
+-                if (this instanceof EntityInsentient) {
+-                    ((EntityInsentient) this).unleash(true, true); // Paper drop lead
+-                }
+-                // Paper end
++                // Anaplane - reverting Paper patch 459
+                 Entity entity = this.getEntityType().a((World) worldserver);
+ 
+                 if (entity != null) {
+@@ -2847,6 +2837,12 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+                     // CraftBukkit start - Forward the CraftEntity to the new entity
+                     this.getBukkitEntity().setHandle(entity);
+                     entity.bukkitEntity = this.getBukkitEntity();
++
++                    // Anaplane start - reverting Paper patch 459
++                    if (this instanceof EntityInsentient) {
++                        ((EntityInsentient) this).unleash(true, false); // Unleash to prevent duping of leads.
++                    }
++                    // Anaplane end
+                     // CraftBukkit end
+                 }
+ 
+@@ -2971,7 +2967,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+     }
+ 
+     public boolean canPortal() {
+-        return isAlive() && valid; // Paper
++        return true; // Anaplane - revert Paper patch 459
+     }
+ 
+     public float a(Explosion explosion, IBlockAccess iblockaccess, BlockPosition blockposition, IBlockData iblockdata, Fluid fluid, float f) {
+diff --git a/src/main/java/net/minecraft/server/EntityArmorStand.java b/src/main/java/net/minecraft/server/EntityArmorStand.java
+index 0ef9516fbe9283cb1aca71eb9dbdbec0d98c8fa4..453da69ad80947a5a929f01d8e6b24d65ed648e0 100644
+--- a/src/main/java/net/minecraft/server/EntityArmorStand.java
++++ b/src/main/java/net/minecraft/server/EntityArmorStand.java
+@@ -567,7 +567,7 @@ public class EntityArmorStand extends EntityLiving {
+         for (i = 0; i < this.handItems.size(); ++i) {
+             itemstack = (ItemStack) this.handItems.get(i);
+             if (!itemstack.isEmpty()) {
+-                drops.add(org.bukkit.craftbukkit.inventory.CraftItemStack.asCraftMirror(itemstack)); // CraftBukkit - add to drops // Paper - mirror so we can destroy it later - though this call site was safe
++                drops.add(org.bukkit.craftbukkit.inventory.CraftItemStack.asBukkitCopy(itemstack)); // CraftBukkit - add to drops // Anaplane - reverting Paper patch 459
+                 this.handItems.set(i, ItemStack.b);
+             }
+         }
+@@ -575,7 +575,7 @@ public class EntityArmorStand extends EntityLiving {
+         for (i = 0; i < this.armorItems.size(); ++i) {
+             itemstack = (ItemStack) this.armorItems.get(i);
+             if (!itemstack.isEmpty()) {
+-                drops.add(org.bukkit.craftbukkit.inventory.CraftItemStack.asCraftMirror(itemstack)); // CraftBukkit - add to drops // Paper - mirror so we can destroy it later - though this call site was safe
++                drops.add(org.bukkit.craftbukkit.inventory.CraftItemStack.asBukkitCopy(itemstack)); // CraftBukkit - add to drops // Anaplane - reverting Paper patch 459
+                 this.armorItems.set(i, ItemStack.b);
+             }
+         }
+diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
+index 9ff0f70154367b99317ed3927a97ec08c7e9e015..69f8327d1b266de70dce1c738fa8e6a4af8b5a3f 100644
+--- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
++++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
+@@ -836,8 +836,7 @@ public class CraftEventFactory {
+         for (org.bukkit.inventory.ItemStack stack : event.getDrops()) {
+             if (stack == null || stack.getType() == Material.AIR || stack.getAmount() == 0) continue;
+ 
+-            world.dropItem(entity.getLocation(), stack); // Paper - note: dropItem already clones due to this being bukkit -> NMS
+-            if (stack instanceof CraftItemStack) stack.setAmount(0); // Paper - destroy this item - if this ever leaks due to game bugs, ensure it doesn't dupe, but don't nuke bukkit stacks of manually added items
++            world.dropItem(entity.getLocation(), stack); // Anaplane - reverting Paper patch 459
+         }
+ 
+         return event;

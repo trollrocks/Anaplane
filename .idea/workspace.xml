@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f46faa27-d996-44bd-943a-14d291c6d695" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Anaplane-Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Anaplane-Server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Anaplane-Server/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Anaplane-Server/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Anaplane-Server/src/main/java/net/minecraft/server/MinecraftServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Anaplane-Server/src/main/java/net/minecraft/server/MinecraftServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Anaplane-Server/src/main/java/org/bukkit/craftbukkit/CraftServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Anaplane-Server/src/main/java/org/bukkit/craftbukkit/CraftServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Anaplane-Server/src/main/java/org/bukkit/craftbukkit/util/Versioning.java" beforeDir="false" afterPath="$PROJECT_DIR$/Anaplane-Server/src/main/java/org/bukkit/craftbukkit/util/Versioning.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patches/server/0001-MyAirplaneFork-branding.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/anaplane.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +25,18 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Anaplane-Server" />
@@ -41,9 +53,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -85,7 +104,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614019865409</updated>
-      <workItem from="1614019869945" duration="1011000" />
+      <workItem from="1614019869945" duration="3415000" />
+      <workItem from="1614160698191" duration="389000" />
     </task>
     <servers />
   </component>
@@ -102,5 +122,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
