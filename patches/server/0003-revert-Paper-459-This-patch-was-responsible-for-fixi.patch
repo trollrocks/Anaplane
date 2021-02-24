@@ -8,7 +8,7 @@ Subject: [PATCH] revert Paper 459 This patch was responsible for fixing most
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index e16ba05cf64b2c8ae3e38e89c9d869ecb5d23552..7051f277148b390c061bf7feef28c08a1739aecc 100644
+index f14ed2f1d8af1150baf1402615447ae84677c031..0e145b74fa7168fbef8e6f2198ab1b2fda6afbeb 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -2148,12 +2148,11 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke

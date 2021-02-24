@@ -18,10 +18,10 @@ index 173a210392d71cdfc551f095dc0d9c9040d22d3f..ff14750ba5725c8c8a412731a5e91462
  
      @Override
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 4185ec46435ddf48d9e25c4d71ac4e14eb6301cf..f92e9530ee87266242fff4e889dbb01f004b2ccf 100644
+index 4058c1f7ada7d0c9e4ba73a0073b4f94bf410a8f..f9ee6d98acc88264f92f0645b8213d363b3466c4 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
-@@ -2993,7 +2993,7 @@ public class PlayerConnection implements PacketListenerPlayIn {
+@@ -2968,7 +2968,7 @@ public class PlayerConnection implements PacketListenerPlayIn {
      // Paper end
  
      public final boolean isDisconnected() {

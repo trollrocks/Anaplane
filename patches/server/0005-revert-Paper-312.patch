@@ -11,10 +11,10 @@ Hmm.. maybe I should make an `anaplane.air` config file that lets you
 configure what dupes you want on and the risks with them.
 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index f9ee6d98acc88264f92f0645b8213d363b3466c4..2431d52097babab7d1e4f58e3e90d8af7e6388b8 100644
+index f92e9530ee87266242fff4e889dbb01f004b2ccf..dd8ebd91cd61fef075da892188251c50e6c25528 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
-@@ -911,52 +911,7 @@ public class PlayerConnection implements PacketListenerPlayIn {
+@@ -936,52 +936,7 @@ public class PlayerConnection implements PacketListenerPlayIn {
  
      @Override
      public void a(PacketPlayInBEdit packetplayinbedit) {
